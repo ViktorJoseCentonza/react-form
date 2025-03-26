@@ -16,21 +16,23 @@ function App() {
   function taskRemover(index) {
     console.log(tasks[index])
     setTasks(() => tasks.filter((task) => task !== tasks[index]))
-    console.log(tasks)
     console.log("taskremover run!")
+    console.log(tasks, index)
   }
 
   function taskEditor(index) {
     console.log(newTask)
-    setTasks(() => tasks.slice(tasks.splice(index, 1, newTask)))
+    tasks.splice(index, 1, newTask)
+    setTasks(() => tasks.slice())
     console.log("taskEditor run!")
-    console.log(tasks)
+    console.log(tasks, index)
   }
 
   return (
     <>
       <div className='taskHolder'>
         <form onSubmit={taskAdder}>
+          <h3>please write your task name and press Add to create a new one, or edit to modify that task with the name you have written.</h3>
           <input type="text" name="task_helper" id="task_helper" placeholder='new task' onChange={(e) => setNewTask(e.target.value)} />
           <button type="submit">Add</button>
         </form>
