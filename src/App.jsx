@@ -22,8 +22,11 @@ function App() {
 
   function taskEditor(index) {
     console.log(newTask)
-    tasks.splice(index, 1, newTask)
-    setTasks(() => tasks.slice())
+    setTasks((prevState) => {
+      const editedTasks = [...prevState]
+      editedTasks[index] = newTask
+      return editedTasks
+    })
     console.log("taskEditor run!")
     console.log(tasks, index)
   }
