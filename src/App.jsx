@@ -9,12 +9,17 @@ function App() {
   function taskHandler(e) {
     e.preventDefault()
     setTasks([newTask, ...tasks])
+    console.log("taskhandler run!")
+    console.log(tasks)
   }
 
-  function taskRemover(task) {
-    console.log(tasks.indexOf(task))
-    setTasks(() => tasks.splice(tasks.indexOf(task), 1))
+  function taskRemover(index) {
+    console.log(tasks[index])
+    setTasks(() => tasks.filter((task) => task !== tasks[index]))
     console.log(tasks)
+
+    console.log("taskremover run!")
+
   }
 
   return (
@@ -26,11 +31,13 @@ function App() {
         </form>
 
         {tasks.map((task, index) => (
+
           <div key={`taskHolder-${index}`} className='task-holder d-flex'>
-            <button onClick={() => taskRemover(task)}>X</button>
+            <button onClick={() => taskRemover(index)}>X</button>
             <h2 >{task}</h2>
           </div>
         ))}
+
       </div>
     </>
   )
