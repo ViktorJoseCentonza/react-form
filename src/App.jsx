@@ -10,6 +10,13 @@ function App() {
     e.preventDefault()
     setTasks([newTask, ...tasks])
   }
+
+  function taskRemover(task) {
+    console.log(tasks.indexOf(task))
+    setTasks(() => tasks.splice(tasks.indexOf(task), 1))
+    console.log(tasks)
+  }
+
   return (
     <>
       <div className='taskHolder'>
@@ -19,7 +26,10 @@ function App() {
         </form>
 
         {tasks.map((task, index) => (
-          <h2 key={`task-${index}`}>{task}</h2>
+          <div key={`taskHolder-${index}`} className='task-holder d-flex'>
+            <button onClick={() => taskRemover(task)}>X</button>
+            <h2 >{task}</h2>
+          </div>
         ))}
       </div>
     </>
